@@ -1,0 +1,65 @@
+##### **Trains**
+def get_state_from_station(name):
+    df = df_stations[df_stations['name'] == name]
+    names = list(set(df['ST_NM'].to_list()))
+    if names:
+        return names[0]
+    return None
+trains_gdf['fstate'] = trains_gdf['from_station_name'].apply(get_state_from_station)
+trains_gdf['tstate'] = trains_gdf['to_station_name'].apply(get_state_from_station)
+def plot_train(state_name = None):
+    clat = 24
+    clon = 80
+    zoom = 4
+    title = 'India'
+    
+    trains_gdf = trains_gdf.dropna(subset=['fstate', 'tstate'], axis=0)
+    
+    if state_name:
+        all_states = list(states_ind['ST_NM'].unique())
+        
+        if state_name in all_states:
+            trains_gdf = trains_gdf[trains_gdf['fstate'] == state_name]
+            title = state_name
+            
+            # if within_state:
+            #     trians_gdf = trains_gdf[trains_gdf['tstate'] == state_name]
+            # else:
+            #     pass
+        
+        else:
+            return '`state_name` not matching with the records.'    
+        
+    line_traces = []
+
+    for _, row in trains_gdf.iterrows():
+        line = row['geometry']
+        lon, lat = line.coords.xy
+        lon=list(lon),
+        lat=list(lat),
+        
+        line_traces.append(go.Scattermapbox(
+            mode='lines',
+            lon=lon,
+            lat=lat,
+            line=dict(width=2, color='blue'),
+            name=row['name'],
+            showlegend = False
+        ))
+
+    # Create a map
+    fig = go.Figure(line_traces)
+
+    fig.update_layout(
+        mapbox_style="carto-positron",
+        mapbox=dict(
+            center=dict(lat=20.5937, lon=78.9629),
+            zoom=4
+        ),
+        title="LineString Routes",
+        margin={"r":0,"t":40,"l":0,"b":0}
+    )
+
+    fig.show()
+    
+plot_train('Assam')
