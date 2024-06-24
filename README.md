@@ -18,6 +18,25 @@ This project analyses Indian railways data consisting of trains, stations and sc
 ➖ Average Distance: 544.77km
 
 
+⏺Insights:
+
+
+➖Uttar Pradesh has the most number of stations
+
+➖Most stations are served by Northern Railway
+
+➖Passenger train type is the most common train types.
+
+➖Howrah Junction serves most trains based on Arrival anddeparture
+
+➖MSB is the most common from station
+
+➖VLCY is the most common to station
+
+➖Most common coach in trains are sleepers.
+
+➖Garib Nawaz Express travels the most distance.
+
 <div>
 	<img src="https://github.com/Maddy1107/Indian_railways_analysis/blob/main/Viz%20Images/railways_page-0001.jpg"/>
 	<img src="https://github.com/Maddy1107/Indian_railways_analysis/blob/main/Viz%20Images/railways_page-0002.jpg"/>
